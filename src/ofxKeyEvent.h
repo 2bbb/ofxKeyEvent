@@ -146,6 +146,7 @@ namespace ofx {
             }
             
             bool bDraw;
+            bool bEnabled;
             
         public:
             Manager()
@@ -156,7 +157,6 @@ namespace ofx {
             void setup(const std::string &name) {
                 this->name = name;
             }
-            
             
             void draw(float x, float y) {
                 if(!bDraw) return;
@@ -221,11 +221,17 @@ namespace ofx {
             void resume() {
                 ofAddListener(ofEvents().keyPressed, this, &Manager::keyPressed);
                 ofAddListener(ofEvents().keyReleased, this, &Manager::keyReleased);
+                bEnabled = true;
             }
             
             void pause() {
                 ofRemoveListener(ofEvents().keyPressed, this, &Manager::keyPressed);
                 ofRemoveListener(ofEvents().keyReleased, this, &Manager::keyReleased);
+                bEnabled = false;
+            }
+            
+            bool isEnabled() const {
+                return bEnabled;
             }
             
             void enableDraw() {
