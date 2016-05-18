@@ -220,14 +220,14 @@ namespace ofx {
                 ofAddListener(ofEvents().keyReleased, this, &Manager::keyReleased);
                 bEnabled = true;
             }
-            inline void resume() { enable(); } // DEPRECATED
+            OF_DEPRECATED_MSG("resume() is deprecated: please use enable().", inline void resume()) { enable(); } // DEPRECATED
             
             void disable() {
                 ofRemoveListener(ofEvents().keyPressed, this, &Manager::keyPressed);
                 ofRemoveListener(ofEvents().keyReleased, this, &Manager::keyReleased);
                 bEnabled = false;
             }
-            inline void pause() { disable(); } // DEPRECATED
+            OF_DEPRECATED_MSG("pause() is deprecated: please use disable().", inline void pause()) { disable(); } // DEPRECATED
             
             bool isEnabled() const { return bEnabled; }
             
@@ -238,7 +238,7 @@ namespace ofx {
             }
             
             bool isDrawingNow() const { return bDraw; }
-            inline bool isDrawNow() const { return isDrawingNow(); }
+            OF_DEPRECATED_MSG("isDrawNow() is deprecated: please use isDrawingNow().", inline bool isDrawNow() const) { return isDrawingNow(); }
             
             void dump() const {
                 ofLogNotice("ofxKeyEvent") << "==== press listners ====";
