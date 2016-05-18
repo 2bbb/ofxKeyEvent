@@ -158,8 +158,8 @@ namespace ofx {
                 this->name = name;
             }
             
-            void draw(float x, float y) const {
-                if(!bDraw) return;
+            int draw(float x, float y) const {
+                if(!bDraw) return 0;
                 
                 int offset = 0;
                 {
@@ -185,10 +185,11 @@ namespace ofx {
                         offset += 18;
                     }
                 }
+                return offset;
             }
             
-            void draw(const ofVec2f &vec) const {
-                draw(vec.x, vec.y);
+            int draw(const ofVec2f &vec) const {
+                return draw(vec.x, vec.y);
             }
             
             void drawPressKeyDescription(int key, float x, float y) const {
