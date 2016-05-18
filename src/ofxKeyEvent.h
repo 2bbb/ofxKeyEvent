@@ -229,13 +229,9 @@ namespace ofx {
             }
             inline void pause() { disable(); } // DEPRECATED
             
-            bool isEnabled() const {
-                return bEnabled;
-            }
+            bool isEnabled() const { return bEnabled; }
             
-            void enableDraw() {
-                bDraw = true;
-            }
+            void enableDraw() { bDraw = true; }
             
             void disableDraw() {
                 bDraw = false;
