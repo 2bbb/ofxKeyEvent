@@ -57,10 +57,20 @@ same as removePressListener
 
 ----
 
-#### void pause()
-#### void resume()
+#### void keyPressed(int key)
+#### void keyReleased(int key)
 
-* pause/resume to listen event
+call listener manually
+
+----
+
+#### void enable()
+#### void disable()
+
+##### void resume() // deprecated 
+##### void pause() // deprecated
+
+* enable/disable to listen event
 
 #### isEnabled() const
 
@@ -74,6 +84,7 @@ same as removePressListener
 * enable/disable draw()
 
 #### bool isDrawNow() const
+##### bool isDrawingNow() const // deprecated
 
 * get drawing status
 
