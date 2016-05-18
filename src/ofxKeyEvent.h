@@ -267,6 +267,10 @@ namespace ofx {
                 }
             }
             
+            Manager &addListener(int key, std::function<void()> listener, const std::string &description = "no description"){
+                return addPressListener(key, listener, description);
+            }
+            
             Manager &addPressListener(int key, std::function<void()> listener, const std::string &description = "no description") {
                 
                 auto &descriptions = press_descriptions();
@@ -283,6 +287,10 @@ namespace ofx {
                 return *this;
             }
             
+            bool removeListener(int key){
+                return removePressListener(key);
+            }
+
             bool removePressListener(int key) {
                 auto &descriptions = press_descriptions();
                 std::size_t count = descriptions.count(key);
