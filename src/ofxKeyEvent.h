@@ -133,8 +133,8 @@ namespace ofx {
             detail::Listeners press;
             detail::Listeners release;
             
-            void keyPressed(ofKeyEventArgs &event) { press(event.key); }
-            void keyReleased(ofKeyEventArgs &event) { release(event.key); }
+            void keyPressed(ofKeyEventArgs &event) { keyPressed(event.key); }
+            void keyReleased(ofKeyEventArgs &event) { keyReleased(event.key); }
             std::string print(int key) const {
                 if(std::isprint(static_cast<char>(key))) {
                     std::string str = "' '";
@@ -301,6 +301,8 @@ namespace ofx {
                 return press.removeListener(key);
             }
             
+            void keyPressed(int key) const { press(key); }
+            
             bool isPressListenerMuted(int key) const {
                 return press.isMuted(key);
             }
@@ -344,6 +346,8 @@ namespace ofx {
                 }
                 return release.removeListener(key);
             }
+            
+            void keyReleased(int key) const { release(key); }
             
             bool isReleaseListenerMuted(int key) const {
                 return release.isMuted(key);
