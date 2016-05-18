@@ -58,12 +58,9 @@ same as removePressListener
 ----
 
 #### void pause()
-
-* pause to listen event
-
 #### void resume()
 
-* resume to listen event
+* pause/resume to listen event
 
 #### isEnabled() const
 
@@ -73,9 +70,12 @@ same as removePressListener
 
 #### void enableDraw()
 #### void disableDraw()
-#### bool isDrawNow()
 
 * enable/disable draw()
+
+#### bool isDrawNow() const
+
+* get drawing status
 
 ----
 
