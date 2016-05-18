@@ -199,22 +199,26 @@ namespace ofx {
             }
             
             void drawPressKeyDescription(int key, float x, float y) {
+                if(!bDraw) return;
                 auto it = press.getListenerMap().find(key);
                 if(it == press.getListenerMap().end()) return;
                 ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
             }
             
             void drawPressKeyDescription(int key, const ofVec2f &vec) {
+                if(!bDraw) return;
                 drawPressKeyDescription(key, vec.x, vec.y);
             }
             
             void drawReleaseKeyDescription(int key, float x, float y) {
+                if(!bDraw) return;
                 auto it = press.getListenerMap().find(key);
                 if(it == press.getListenerMap().end()) return;
                 ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
             }
             
             void drawReleaseKeyDescription(int key, const ofVec2f &vec) {
+                if(!bDraw) return;
                 drawReleaseKeyDescription(key, vec.x, vec.y);
             }
 
