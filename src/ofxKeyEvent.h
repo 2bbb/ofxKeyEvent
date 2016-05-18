@@ -160,11 +160,8 @@ namespace ofx {
             
             void draw(float x, float y) const {
                 if(!bDraw) return;
-                ofPushMatrix();
-                ofPushStyle();
                 
                 int offset = 0;
-                
                 {
                     auto &maps = press.getListenerMap();
                     std::string text;
@@ -176,7 +173,6 @@ namespace ofx {
                         offset += 18;
                     }
                 }
-                
                 offset += 4;
                 {
                     auto &maps = release.getListenerMap();
@@ -189,9 +185,6 @@ namespace ofx {
                         offset += 18;
                     }
                 }
-                
-                ofPopStyle();
-                ofPopMatrix();
             }
             
             void draw(const ofVec2f &vec) const {
