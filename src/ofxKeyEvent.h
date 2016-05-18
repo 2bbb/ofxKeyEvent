@@ -215,17 +215,19 @@ namespace ofx {
                 drawReleaseKeyDescription(key, vec.x, vec.y);
             }
 
-            void resume() {
+            void enable() {
                 ofAddListener(ofEvents().keyPressed, this, &Manager::keyPressed);
                 ofAddListener(ofEvents().keyReleased, this, &Manager::keyReleased);
                 bEnabled = true;
             }
+            inline void resume() { enable(); } // DEPRECATED
             
-            void pause() {
+            void disable() {
                 ofRemoveListener(ofEvents().keyPressed, this, &Manager::keyPressed);
                 ofRemoveListener(ofEvents().keyReleased, this, &Manager::keyReleased);
                 bEnabled = false;
             }
+            inline void pause() { disable(); } // DEPRECATED
             
             bool isEnabled() const {
                 return bEnabled;
@@ -239,9 +241,8 @@ namespace ofx {
                 bDraw = false;
             }
             
-            bool isDrawNow() const {
-                return bDraw;
-            }
+            bool isDrawingNow() const { return bDraw; }
+            inline bool isDrawNow() const { return isDrawingNow(); }
             
             void dump() const {
                 ofLogNotice("ofxKeyEvent") << "==== press listners ====";
