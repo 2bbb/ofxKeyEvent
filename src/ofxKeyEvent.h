@@ -53,7 +53,7 @@ namespace ofx {
             }
             return std::string("unknown key: ") + ofToString(key);
         };
-#undef key
+#undef key_case
         
         struct Listener {
             Listener(std::function<void()> callback, const std::string &description)
