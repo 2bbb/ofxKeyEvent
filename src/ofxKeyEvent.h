@@ -151,8 +151,8 @@ namespace ofx {
         public:
             Manager()
             : name("no name listener")
-            , bDraw(false) { resume(); }
-            ~Manager() { pause(); }
+            , bDraw(false) { enable(); }
+            ~Manager() { disable(); }
             
             void setup(const std::string &name) {
                 this->name = name;
