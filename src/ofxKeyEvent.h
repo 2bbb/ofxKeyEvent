@@ -64,7 +64,7 @@ namespace ofx {
             void mute() { bMute = true; }
             void unmute() { bMute = false; }
             bool isMuted() const { return bMute; }
-            void operator()() { if(!isMuted()) callback(); }
+            void operator()() const { if(!isMuted()) callback(); }
             const std::string &getDescription() const { return description; }
         private:
             std::function<void()> callback;
@@ -100,7 +100,7 @@ namespace ofx {
                     return setMute(key, false);
                 }
                 
-                void operator()(int key) {
+                void operator()(int key) const {
                     auto it = maps.find(key);
                     if(it != maps.end()) it->second();
                 }
@@ -133,9 +133,9 @@ namespace ofx {
             detail::Listeners press;
             detail::Listeners release;
             
-            void keyPressed(ofKeyEventArgs &event) { press(event.key);}
+            void keyPressed(ofKeyEventArgs &event) { press(event.key); }
             void keyReleased(ofKeyEventArgs &event) { release(event.key); }
-            std::string print(int key) {
+            std::string print(int key) const {
                 if(std::isprint(static_cast<char>(key))) {
                     std::string str = "' '";
                     str[1] = static_cast<char>(key);
@@ -158,7 +158,7 @@ namespace ofx {
                 this->name = name;
             }
             
-            void draw(float x, float y) {
+            void draw(float x, float y) const {
                 if(!bDraw) return;
                 ofPushMatrix();
                 ofPushStyle();
@@ -194,30 +194,30 @@ namespace ofx {
                 ofPopMatrix();
             }
             
-            void draw(const ofVec2f &vec) {
+            void draw(const ofVec2f &vec) const {
                 draw(vec.x, vec.y);
             }
             
-            void drawPressKeyDescription(int key, float x, float y) {
+            void drawPressKeyDescription(int key, float x, float y) const {
                 if(!bDraw) return;
                 auto it = press.getListenerMap().find(key);
                 if(it == press.getListenerMap().end()) return;
                 ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
             }
             
-            void drawPressKeyDescription(int key, const ofVec2f &vec) {
+            void drawPressKeyDescription(int key, const ofVec2f &vec) const {
                 if(!bDraw) return;
                 drawPressKeyDescription(key, vec.x, vec.y);
             }
             
-            void drawReleaseKeyDescription(int key, float x, float y) {
+            void drawReleaseKeyDescription(int key, float x, float y) const {
                 if(!bDraw) return;
                 auto it = press.getListenerMap().find(key);
                 if(it == press.getListenerMap().end()) return;
                 ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
             }
             
-            void drawReleaseKeyDescription(int key, const ofVec2f &vec) {
+            void drawReleaseKeyDescription(int key, const ofVec2f &vec) const {
                 if(!bDraw) return;
                 drawReleaseKeyDescription(key, vec.x, vec.y);
             }
@@ -246,11 +246,11 @@ namespace ofx {
                 bDraw = false;
             }
             
-            bool isDrawNow() {
+            bool isDrawNow() const {
                 return bDraw;
             }
             
-            void dump() {
+            void dump() const {
                 ofLogNotice("ofxKeyEvent") << "==== press listners ====";
                 if(press_descriptions().size() == 0) {
                     ofLogNotice("ofxKeyEvent") << "no event registered";
