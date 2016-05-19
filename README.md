@@ -107,9 +107,16 @@ call listener manually
 ----
 
 #### void draw(int x, int y) const
-#### void draw(const ofVec2f &pos) const
+#### void draw(const ofVec2f &pos = ofVec2f()) const
 
 draw descriptions
+
+----
+
+#### void drawWithRegisteredOrder(int x, int y) const
+#### void drawWithRegisteredOrder(const ofVec2f &pos = ofVec2f()) const
+
+draw descriptions with registered order
 
 ----
 

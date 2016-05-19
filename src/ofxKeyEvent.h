@@ -76,8 +76,11 @@ namespace ofx {
             struct Listeners {
                 void addListener(int key, std::function<void()> listener, const std::string &description) {
                     maps.insert(std::make_pair(key, Listener(listener, description)));
+                    orderedKeys.push_back(key);
                 }
                 bool removeListener(int key) {
+                    orderedKeys.erase(std::remove(orderedKeys.begin(), orderedKeys.end(), key),
+                                      orderedKeys.end());
                     return maps.erase(key) != 0L;
                 }
                 bool isMuted(int key) const {
@@ -107,8 +110,12 @@ namespace ofx {
                 const std::map<int, Listener> &getListenerMap() const {
                     return maps;
                 }
+                const std::vector<int> &getOrderedKeys() const {
+                    return orderedKeys;
+                }
             private:
                 std::map<int, Listener> maps;
+                std::vector<int> orderedKeys;
             };
         };
         
@@ -165,7 +172,7 @@ namespace ofx {
                 {
                     auto &maps = press.getListenerMap();
                     std::string text;
-                    ofDrawBitmapString(name + " [key press listener]", x, y + offset);
+                    ofDrawBitmapString(name + " [key press listeners]", x, y + offset);
                     offset += 18;
                     for(auto it = maps.cbegin(); it != maps.cend(); ++it) {
                         text = print(it->first) + ":  " + it->second.getDescription();
@@ -177,7 +184,7 @@ namespace ofx {
                 {
                     auto &maps = release.getListenerMap();
                     std::string text;
-                    ofDrawBitmapString(name + " [key release listener]", x, y + offset);
+                    ofDrawBitmapString(name + " [key release listeners]", x, y + offset);
                     offset += 18;
                     for(auto it = maps.cbegin(); it != maps.cend(); ++it) {
                         text = print(it->first) + ":  " + it->second.getDescription();
@@ -188,8 +195,40 @@ namespace ofx {
                 return offset;
             }
             
-            int draw(const ofVec2f &vec) const {
+            int draw(const ofVec2f &vec = ofVec2f()) const {
                 return draw(vec.x, vec.y);
+            }
+            
+            int drawByRegisteringOrder(float x, float y) const {
+                if(!bDraw) return 0;
+                
+                int offset = 0;
+                {
+                    auto &keys = press.getOrderedKeys();
+                    std::string text;
+                    ofDrawBitmapString(name + " [key press listeners]", x, y + offset);
+                    offset += 18;
+                    for(const auto &key : keys) {
+                        drawPressKeyDescription(key, x, y + offset);
+                        offset += 18;
+                    }
+                }
+                offset += 4;
+                {
+                    auto &keys = release.getOrderedKeys();
+                    std::string text;
+                    ofDrawBitmapString(name + " [key release listeners]", x, y + offset);
+                    offset += 18;
+                    for(const auto &key : keys) {
+                        drawReleaseKeyDescription(key, x, y + offset);
+                        offset += 18;
+                    }
+                }
+                return offset;
+            }
+            
+            int drawByRegisteringOrder(const ofVec2f &vec = ofVec2f()) const {
+                return drawByRegisteringOrder(vec.x, vec.y);
             }
             
             void drawPressKeyDescription(int key, float x, float y) const {
