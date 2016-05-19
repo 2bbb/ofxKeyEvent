@@ -135,6 +135,11 @@ dump out descriptions of listener that registered to all of ofxKeyEvent object t
 
 ## Update history
 
+### 2016/05/20 ver 0.0.2 release
+
+* many update
+* thx @nariakiiwatani
+
 ### 2016/05/03 ver 0.0.1 release
 
 * initial
