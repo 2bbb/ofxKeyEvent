@@ -199,7 +199,7 @@ namespace ofx {
                 return draw(vec.x, vec.y);
             }
             
-            int drawByRegisteringOrder(float x, float y) const {
+            int drawWithRegisteredOrder(float x, float y) const {
                 if(!bDraw) return 0;
                 
                 int offset = 0;
@@ -227,8 +227,8 @@ namespace ofx {
                 return offset;
             }
             
-            int drawByRegisteringOrder(const ofVec2f &vec = ofVec2f()) const {
-                return drawByRegisteringOrder(vec.x, vec.y);
+            int drawWithRegisteredOrder(const ofVec2f &vec = ofVec2f()) const {
+                return drawWithRegisteredOrder(vec.x, vec.y);
             }
             
             void drawPressKeyDescription(int key, float x, float y) const {
