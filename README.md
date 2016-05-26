@@ -4,11 +4,19 @@
 class ofApp : public ofBaseApp {
 	ofxKeyEventManager manager;
 	int value{0};
-	void minus() {};
+	void minus() { value--; };
 public:
 	void setup() {
-		manager.addListener('+', [this] { value++; });
-		manager.addListener('-', std::bind(&ofApp::minus, this));
+		manager.addListener('+', [this] { value++; }, "increment value");
+		manager.addListener('-', std::bind(&ofApp::minus, this), "decrement value");
+		manager.enableDraw();
+	}
+	
+	void draw() {
+		manager.draw(10, 10);
+		// draw
+		// '+': increment value
+		// '-': decrement value
 	}
 };
 ```
