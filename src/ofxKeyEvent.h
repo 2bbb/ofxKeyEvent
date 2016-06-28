@@ -231,11 +231,19 @@ namespace ofx {
                 return drawWithRegisteredOrder(vec.x, vec.y);
             }
             
+            const std::vector<int> getRegisterdPressKeys() const {
+                return press.getOrderedKeys();
+            }
+            
+            std::string getPressKeyDescription(int key) const {
+                auto it = press.getListenerMap().find(key);
+                if(it == press.getListenerMap().end()) return "not registered";
+                return print(it->first) + ":  " + it->second.getDescription();
+            }
+            
             void drawPressKeyDescription(int key, float x, float y) const {
                 if(!bDraw) return;
-                auto it = press.getListenerMap().find(key);
-                if(it == press.getListenerMap().end()) return;
-                ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
+                ofDrawBitmapString(getPressKeyDescription(key), x, y);
             }
             
             void drawPressKeyDescription(int key, const ofVec2f &vec) const {
@@ -243,11 +251,18 @@ namespace ofx {
                 drawPressKeyDescription(key, vec.x, vec.y);
             }
             
+            const std::vector<int> getRegisterdReleaseKeys() const {
+                return release.getOrderedKeys();
+            }
+            
+            std::string getReleaseKeyDescription(int key) const {
+                auto it = release.getListenerMap().find(key);
+                if(it == release.getListenerMap().end()) return "not registered";
+                return print(it->first) + ":  " + it->second.getDescription();
+            }
             void drawReleaseKeyDescription(int key, float x, float y) const {
                 if(!bDraw) return;
-                auto it = press.getListenerMap().find(key);
-                if(it == press.getListenerMap().end()) return;
-                ofDrawBitmapString(print(it->first) + ":  " + it->second.getDescription(), x, y);
+                ofDrawBitmapString(getReleaseKeyDescription(key), x, y);
             }
             
             void drawReleaseKeyDescription(int key, const ofVec2f &vec) const {
