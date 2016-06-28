@@ -400,6 +400,16 @@ namespace ofx {
             inline bool unmuteReleaseListener(int key) {
                 return release.unmute(key);
             }
+            
+            inline Manager &addToggleFullScreenListener(int key) {
+                addListener(key, ofToggleFullscreen, "toggle full screen");
+            }
+            inline Manager &addHideCursorListener(int key) {
+                addListener(key, ofHideCursor, "hide cursor");
+            }
+            inline Manager &addShowCursorListener(int key) {
+                addListener(key, ofShowCursor, "show cursor");
+            }
         };
     };
 };
