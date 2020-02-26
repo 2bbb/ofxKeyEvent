@@ -16,10 +16,9 @@ void ofApp::update(){
 void ofApp::draw(){
 	manager.draw(10, 10);
 
-	ofDrawCircle(ofGetWidth()*0.5, ofGetHeight()*0.5, value*10);
-	// draw
 	// '+': increment value
 	// '-': decrement value
+	ofDrawCircle(ofGetWidth()*0.5, ofGetHeight()*0.5, value*10);
 }
 
 //--------------------------------------------------------------
