@@ -8,8 +8,11 @@ class ofApp : public ofBaseApp {
 public:
 
 	ofxKeyEventManager manager;
+	
 	int value{ 10 };
 	void minus() { value--; };
+
+	ofParameter<bool> bColor{ "color", true };
 
 	void setup();
 	void update();
