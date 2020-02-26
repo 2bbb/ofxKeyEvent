@@ -6,7 +6,7 @@
 //
 
 #pragma once
-
+#include "ofMain.h"
 #include <map>
 #include <functional>
 
@@ -143,7 +143,8 @@ namespace ofx {
             void keyPressed(ofKeyEventArgs &event) { keyPressed(event.key); }
             void keyReleased(ofKeyEventArgs &event) { keyReleased(event.key); }
             std::string print(int key) const {
-                if(std::isprint(static_cast<char>(key))) {
+				if(true){
+                //if(std::isprint(static_cast<char>(key))) {
                     std::string str = "' '";
                     str[1] = static_cast<char>(key);
                     return str;
