@@ -9,6 +9,7 @@
 
 #include <map>
 #include <functional>
+#include <cctype>
 
 #include "ofEvent.h"
 #include "ofEvents.h"
