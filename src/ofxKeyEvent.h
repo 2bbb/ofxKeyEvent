@@ -7,13 +7,22 @@
 
 #pragma once
 
+#include "ofEvent.h"
+#include "ofEvents.h"
+#include "ofEventUtils.h"
+
+#include "ofGraphics.h"
+#include "ofVec2f.h"
+#include "ofLog.h"
+#include "ofUtils.h"
+
+#include "ofAppRunner.h"
+
+
 #include <map>
 #include <functional>
 #include <cctype>
 
-#include "ofEvent.h"
-#include "ofEvents.h"
-#include "ofEventUtils.h"
 
 namespace ofx {
     namespace KeyEvent {
@@ -425,6 +434,22 @@ namespace ofx {
             }
             inline Manager &addShowCursorListener(int key) {
                 return addListener(key, ofShowCursor, "show cursor");
+            }
+            
+            void fookPressEvent(ofEvent<ofKeyEventArgs> &e) {
+                ofAddListener(e, this, &Manager::keyPressed);
+            }
+            
+            void unfookPressEvent(ofEvent<ofKeyEventArgs> &e) {
+                ofRemoveListener(e, this, &Manager::keyPressed);
+            }
+            
+            void fookReleaseEvent(ofEvent<ofKeyEventArgs> &e) {
+                ofAddListener(e, this, &Manager::keyReleased);
+            }
+            
+            void unfookReleaseEvent(ofEvent<ofKeyEventArgs> &e) {
+                ofRemoveListener(e, this, &Manager::keyReleased);
             }
         };
     };
